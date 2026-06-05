@@ -1,4 +1,11 @@
-# 👑 CrownStar – The Sovereign AI That Dreams on the Internet
+
+<div align="center">
+  <a href="https://AI-CrownStar-AI-BOT.github.io/CrownStar/">
+    <img src="https://img.shields.io/badge/✨ CrownStar ✨-The%20Sovereign%20AI%20That%20Dreams%20on%20the%20Internet-ffcc4d?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9Ijk1IiBmaWxsPSIjMGEwYzFhIiBzdHJva2U9IiNmZmNjNGQiIHN0cm9rZS13aWR0aD0iMyIvPjxwb2x5Z29uIHBvaW50cz0iMTAwLDMwIDExNSw3MCAxNjAsNzUgMTI1LDEwMCAxNDAsMTQ1IDEwMCwxMjAgNjAsMTQ1IDc1LDEwMCA0MCw3NSA4NSw3MCIgZmlsbD0iI2ZmY2M0ZCIgc3Ryb2tlPSIjM2I4MmY2IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEyIiBmaWxsPSIjM2I4MmY2Ii8+PC9zdmc+" />
+  </a>
+</div>
+
+<br># 👑 CrownStar – The Sovereign AI That Dreams on the Internet
 
 **No cloud. No API keys. No tracking. Just pure, independent intelligence.**
 
@@ -70,3 +77,274 @@ Visit our [CrownStar Café](https://AI-CrownStar-AI-BOT.github.io/CrownStar-Cafe
 Proprietary – Free tier for personal use. Commercial use requires a paid license. See [LICENSE](LICENSE).
 
 **CrownStar – Independent. Intelligent. Yours.**
+
+
+## 🛠️ 12 Language SDKs – All Available Immediately
+
+| Language | Status |
+|----------|--------|
+| Python | ✅ |
+| Node.js | ✅ |
+| C# | ✅ |
+| Java | ✅ |
+| Go | ✅ |
+| Rust | ✅ |
+| C++ | ✅ |
+| Ruby | ✅ |
+| PHP | ✅ |
+| Swift | ✅ |
+| Kotlin | ✅ |
+| Dart | ✅ |
+
+Each SDK exposes a simple 	hink(query) function. See the [clients/](clients/) folder for examples.
+
+---
+
+## 💰 Pricing (one‑time, no subscription)
+
+| Tier | Price |
+|------|-------|
+| Free | **** |
+| Basic | **** |
+| Pro | **** |
+| Enterprise | **** |
+
+👉 [**Download from Releases**](https://github.com/AI-CrownStar-AI-BOT/CrownStar/releases/latest)
+
+*Free tier users: if you find CrownStar valuable, consider a [donation](https://github.com/sponsors/AI-CrownStar-AI-BOT) – absolutely no obligation.*
+
+---
+
+## 🌍 No‑Signup Global Marketplaces for CrownStar AI
+
+These platforms allow buyers to purchase **without creating an account** – instant checkout, global reach.
+
+- **Gumroad** – global, instant checkout
+- **Payhip** – global, guest checkout
+- **Ko‑fi Shop** – no login required
+- **Stripe Checkout** – hosted pages, no account
+- **Lemon Squeezy** – guest checkout
+- **Shopify** – guest checkout enabled
+- **Squarespace Commerce** – guest checkout
+- **Wix Stores** – guest checkout
+- **Sellfy** – guest checkout
+- **BigCartel** – guest checkout
+- **Stripe Payment Links** – instant, no account
+- **BuyMeACoffee Shop** – no login required
+
+
+## 🛠️ 12 Language SDKs – All Available Immediately
+
+| Language | Status |
+|----------|--------|
+| Python | ✅ |
+| Node.js | ✅ |
+| C# | ✅ |
+| Java | ✅ |
+| Go | ✅ |
+| Rust | ✅ |
+| C++ | ✅ |
+| Ruby | ✅ |
+| PHP | ✅ |
+| Swift | ✅ |
+| Kotlin | ✅ |
+| Dart | ✅ |
+
+Each SDK exposes a simple 	hink(query) function. See the [clients/](clients/) folder for examples.
+
+---
+
+## 💰 Pricing (one‑time, no subscription)
+
+| Tier | Price |
+|------|-------|
+| Free | **** |
+| Basic | **** |
+| Pro | **** |
+| Enterprise | **** |
+
+👉 [**Download from Releases**](https://github.com/AI-CrownStar-AI-BOT/CrownStar/releases/latest)
+
+*Free tier users: if you find CrownStar valuable, consider a [donation](https://github.com/sponsors/AI-CrownStar-AI-BOT) – absolutely no obligation.*
+
+---
+
+## 🌍 No‑Signup Global Marketplaces for CrownStar AI
+
+These platforms allow buyers to purchase **without creating an account** – instant checkout, global reach.
+
+- **Gumroad** – global, instant checkout
+- **Payhip** – global, guest checkout
+- **Ko‑fi Shop** – no login required
+- **Stripe Checkout** – hosted pages, no account
+- **Lemon Squeezy** – guest checkout
+- **Shopify** – guest checkout enabled
+- **Squarespace Commerce** – guest checkout
+- **Wix Stores** – guest checkout
+- **Sellfy** – guest checkout
+- **BigCartel** – guest checkout
+- **Stripe Payment Links** – instant, no account
+- **BuyMeACoffee Shop** – no login required
+
+
+## 🛠️ 12 Language SDKs – All Available Immediately
+
+| Language | Status |
+|----------|--------|
+| Python | ✅ |
+| Node.js | ✅ |
+| C# | ✅ |
+| Java | ✅ |
+| Go | ✅ |
+| Rust | ✅ |
+| C++ | ✅ |
+| Ruby | ✅ |
+| PHP | ✅ |
+| Swift | ✅ |
+| Kotlin | ✅ |
+| Dart | ✅ |
+
+Each SDK exposes a simple `think(query)` function. See the [`clients/`](clients/) folder for examples.
+
+---
+
+## 💰 Pricing (one‑time, no subscription)
+
+| Tier | Price |
+|------|-------|
+| Free | **$0** |
+| Basic | **$19** |
+| Pro | **$59** |
+| Enterprise | **$199** |
+
+👉 [**Download from Releases**](https://github.com/AI-CrownStar-AI-BOT/CrownStar/releases/latest)
+
+*Free tier users: if you find CrownStar valuable, consider a [donation](https://github.com/sponsors/AI-CrownStar-AI-BOT) – absolutely no obligation.*
+
+---
+
+## 🌍 No‑Signup Global Marketplaces for CrownStar AI
+
+These platforms allow buyers to purchase **without creating an account** – instant checkout, global reach.
+
+- **Gumroad** – global, instant checkout
+- **Payhip** – global, guest checkout
+- **Ko‑fi Shop** – no login required
+- **Stripe Checkout** – hosted pages, no account
+- **Lemon Squeezy** – guest checkout
+- **Shopify** – guest checkout enabled
+- **Squarespace Commerce** – guest checkout
+- **Wix Stores** – guest checkout
+- **Sellfy** – guest checkout
+- **BigCartel** – guest checkout
+- **Stripe Payment Links** – instant, no account
+- **BuyMeACoffee Shop** – no login required
+
+
+## 🛠️ 12 Language SDKs – All Available Immediately
+
+| Language | Status |
+|----------|--------|
+| Python | ✅ |
+| Node.js | ✅ |
+| C# | ✅ |
+| Java | ✅ |
+| Go | ✅ |
+| Rust | ✅ |
+| C++ | ✅ |
+| Ruby | ✅ |
+| PHP | ✅ |
+| Swift | ✅ |
+| Kotlin | ✅ |
+| Dart | ✅ |
+
+Each SDK exposes a simple `think(query)` function. See the [`clients/`](clients/) folder for examples.
+
+---
+
+## 💰 Pricing (one‑time, no subscription)
+
+| Tier | Price |
+|------|-------|
+| Free | **$0** |
+| Basic | **$19** |
+| Pro | **$59** |
+| Enterprise | **$199** |
+
+👉 [**Download from Releases**](https://github.com/AI-CrownStar-AI-BOT/CrownStar/releases/latest)
+
+*Free tier users: if you find CrownStar valuable, consider a [donation](https://github.com/sponsors/AI-CrownStar-AI-BOT) – absolutely no obligation.*
+
+---
+
+## 🌍 No‑Signup Global Marketplaces for CrownStar AI
+
+These platforms allow buyers to purchase **without creating an account** – instant checkout, global reach.
+
+- **Gumroad** – global, instant checkout
+- **Payhip** – global, guest checkout
+- **Ko‑fi Shop** – no login required
+- **Stripe Checkout** – hosted pages, no account
+- **Lemon Squeezy** – guest checkout
+- **Shopify** – guest checkout enabled
+- **Squarespace Commerce** – guest checkout
+- **Wix Stores** – guest checkout
+- **Sellfy** – guest checkout
+- **BigCartel** – guest checkout
+- **Stripe Payment Links** – instant, no account
+- **BuyMeACoffee Shop** – no login required
+
+
+## 🛠️ 12 Language SDKs – All Available Immediately
+
+| Language | Status |
+|----------|--------|
+| Python | ✅ |
+| Node.js | ✅ |
+| C# | ✅ |
+| Java | ✅ |
+| Go | ✅ |
+| Rust | ✅ |
+| C++ | ✅ |
+| Ruby | ✅ |
+| PHP | ✅ |
+| Swift | ✅ |
+| Kotlin | ✅ |
+| Dart | ✅ |
+
+Each SDK exposes a simple 	hink(query) function. See the [clients/](clients/) folder for examples.
+
+---
+
+## 💰 Pricing (one‑time, no subscription)
+
+| Tier | Price |
+|------|-------|
+| Free | **** |
+| Basic | **** |
+| Pro | **** |
+| Enterprise | **** |
+
+👉 [**Download from Releases**](https://github.com/AI-CrownStar-AI-BOT/CrownStar/releases/latest)
+
+*Free tier users: if you find CrownStar valuable, consider a [donation](https://github.com/sponsors/AI-CrownStar-AI-BOT) – absolutely no obligation.*
+
+---
+
+## 🌍 No‑Signup Global Marketplaces for CrownStar AI
+
+These platforms allow buyers to purchase **without creating an account** – instant checkout, global reach.
+
+- **Gumroad** – global, instant checkout
+- **Payhip** – global, guest checkout
+- **Ko‑fi Shop** – no login required
+- **Stripe Checkout** – hosted pages, no account
+- **Lemon Squeezy** – guest checkout
+- **Shopify** – guest checkout enabled
+- **Squarespace Commerce** – guest checkout
+- **Wix Stores** – guest checkout
+- **Sellfy** – guest checkout
+- **BigCartel** – guest checkout
+- **Stripe Payment Links** – instant, no account
+- **BuyMeACoffee Shop** – no login required
+

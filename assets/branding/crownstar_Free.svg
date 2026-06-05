@@ -1,0 +1,7 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="ultraGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff2c4"/><stop offset="50%" stop-color="#e6b84e"/><stop offset="100%" stop-color="#b88a2e"/></linearGradient></defs>
+  <rect width="200" height="200" rx="40" fill="#0a0c1a" stroke="url(#ultraGold)" stroke-width="2"/>
+  <path d="M70,130 L80,90 L95,100 L100,70 L105,100 L120,90 L130,130 Z" fill="url(#ultraGold)"/>
+  <polygon points="100,85 103,96 114,96 105,103 108,114 100,107 92,114 95,103 86,96 97,96" fill="#eef4ff"/>
+  <path d="M88,140 Q100,148 112,140" fill="none" stroke="#eef4ff" stroke-width="2" stroke-linecap="round"/>
+</svg>

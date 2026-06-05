@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ultraGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff2c4"/><stop offset="25%" stop-color="#f7d774"/><stop offset="50%" stop-color="#e6b84e"/><stop offset="75%" stop-color="#d4a017"/><stop offset="100%" stop-color="#b88a2e"/></linearGradient>
+    <linearGradient id="darkRoyal" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0a0c1a"/><stop offset="100%" stop-color="#1a1f3a"/></linearGradient>
+    <filter id="luxGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="200" height="200" rx="30" fill="url(#darkRoyal)" stroke="url(#ultraGold)" stroke-width="3"/>
+  <path d="M55,145 L65,75 L85,95 L100,40 L115,95 L135,75 L145,145 Z" fill="url(#ultraGold)" filter="url(#luxGlow)"/>
+  <polygon points="100,55 107,80 132,80 112,96 120,120 100,106 80,120 88,96 68,80 93,80" fill="#eef4ff" filter="url(#luxGlow)"/>
+  <circle cx="80" cy="125" r="5" fill="#eef4ff"/><circle cx="100" cy="135" r="6" fill="#eef4ff"/><circle cx="120" cy="125" r="5" fill="#eef4ff"/>
+</svg>

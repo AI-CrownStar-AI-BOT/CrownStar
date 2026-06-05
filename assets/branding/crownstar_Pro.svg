@@ -1,0 +1,7 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="ultraGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff2c4"/><stop offset="40%" stop-color="#e6b84e"/><stop offset="100%" stop-color="#b88a2e"/></linearGradient><radialGradient id="radialGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffcc4d" stop-opacity="0.3"/><stop offset="100%" stop-color="#ffcc4d" stop-opacity="0"/></radialGradient></defs>
+  <rect width="200" height="200" rx="25" fill="#0a0c1a" stroke="url(#ultraGold)" stroke-width="2"/>
+  <circle cx="100" cy="100" r="70" fill="url(#radialGlow)"/>
+  <path d="M65,145 L80,90 L95,105 L100,60 L105,105 L120,90 L135,145 Z" fill="url(#ultraGold)"/>
+  <polygon points="100,75 104,92 121,92 108,102 112,119 100,110 88,119 92,102 79,92 96,92" fill="#eef4ff"/>
+</svg>
