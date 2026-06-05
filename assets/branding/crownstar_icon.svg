@@ -1,0 +1,21 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#121a33"/>
+      <stop offset="100%" stop-color="#05070f"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4c8"/>
+      <stop offset="100%" stop-color="#d49a2a"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd56a55"/>
+      <stop offset="100%" stop-color="#ffd56a00"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="128" cy="128" r="118" fill="url(#bg)" stroke="url(#gold)" stroke-width="4"/>
+  <circle cx="128" cy="128" r="70" fill="url(#halo)"/>
+  <path d="M78,165 L100,105 L128,80 L156,105 L178,165 Z" fill="url(#gold)" filter="url(#glow)"/>
+  <polygon points="128,96 134,116 156,116 140,128 146,150 128,138 110,150 116,128 100,116 122,116" fill="#ffffff"/>
+</svg>

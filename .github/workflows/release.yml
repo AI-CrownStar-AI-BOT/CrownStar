@@ -1,0 +1,28 @@
+name: Build and Release
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        tier: [Free, Basic, Pro, Enterprise]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: pip install pywebview aiohttp dnspython python-whois feedparser pyinstaller
+    - name: Build EXE
+      run: |
+        cd src/${{ matrix.tier }}
+        pyinstaller --onefile --name CrownStar_${{ matrix.tier }} crownstar_desktop.py
+    - name: Upload EXE as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: CrownStar_${{ matrix.tier }}
+        path: src/${{ matrix.tier }}/dist/CrownStar_${{ matrix.tier }}.exe
