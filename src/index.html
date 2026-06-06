@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>CrownStar {{TIER}}</title>
+<style>
+:root{--bg:#0a0c1a;--surface:#1e293b;--primary:#3b82f6;--accent:#ffcc4d;--text:#eef4ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:sans-serif;height:100vh;display:flex}
+.sidebar{width:280px;background:var(--surface);display:flex;flex-direction:column}
+.sidebar-header{padding:20px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.logo{font-size:1.5rem;font-weight:bold;background:linear-gradient(135deg,var(--accent),var(--primary));-webkit-background-clip:text;color:transparent}
+.convo-list{flex:1;overflow-y:auto;padding:12px}
+.convo-item{background:rgba(255,255,255,0.05);border-radius:14px;padding:10px;margin-bottom:6px;cursor:pointer}
+.convo-item.active{border-left:3px solid var(--accent);background:rgba(59,130,246,0.15)}
+.new-convo{margin:12px;background:linear-gradient(135deg,var(--primary),#8b5cf6);border:none;padding:10px;border-radius:40px;color:white;cursor:pointer}
+.chat-main{flex:1;display:flex;flex-direction:column}
+.top-bar{padding:12px 20px;background:var(--surface);display:flex;justify-content:space-between}
+.messages{flex:1;overflow-y:auto;padding:20px}
+.message{margin-bottom:16px;max-width:85%}
+.user{margin-left:auto;background:var(--primary);border-radius:20px 20px 4px 20px;padding:10px 16px}
+.assistant{margin-right:auto;background:var(--surface);border-radius:20px 20px 20px 4px;padding:10px 16px;border-left:3px solid var(--accent)}
+.input-area{padding:16px 20px;background:var(--surface);display:flex;gap:12px}
+input{flex:1;background:var(--bg);border:none;padding:12px 20px;border-radius:40px;color:var(--text)}
+button{background:linear-gradient(135deg,var(--primary),#8b5cf6);border:none;padding:0 28px;border-radius:40px;cursor:pointer;color:white}
+.settings-panel{background:rgba(0,0,0,0.7);padding:15px;margin-top:10px;border-radius:10px}
+.slider-row{display:flex;justify-content:space-between;margin:8px 0}
+.slider-label{width:40%}
+input[type=range]{width:50%}
+</style>
+</head>
+<body>
+<div class="sidebar"><div class="sidebar-header"><div class="logo">⭐ CrownStar {{TIER}}</div></div>
+<div class="convo-list" id="convoList"></div>
+<button class="new-convo" id="newConvoBtn">+ New Conversation</button>
+<button class="new-convo" id="exportBtn" style="background:#2d3748;">📎 Export</button>
+<div class="settings-panel" id="settingsPanel" style="display:none">
+    <div class="slider-row"><span class="slider-label">Min words</span><input type="range" id="minLength" min="0" max="100" value="50"><span id="minVal">50</span></div>
+    <div class="slider-row"><span class="slider-label">IQ (creativity)</span><input type="range" id="iq" min="0" max="100" value="70"><span id="iqVal">70</span></div>
+    <div class="slider-row"><span class="slider-label">EQ (emotion)</span><input type="range" id="eq" min="0" max="100" value="60"><span id="eqVal">60</span></div>
+    <div class="slider-row"><span class="slider-label">Personality</span><select id="pers"><option value="friendly">Friendly</option><option value="professional">Professional</option><option value="creative">Creative</option><option value="analytical">Analytical</option></select></div>
+    <div class="slider-row"><span class="slider-label">Language</span><select id="lang"><option value="auto">Auto</option><option value="en">English</option><option value="fr">French</option><option value="de">German</option><option value="es">Spanish</option></select></div>
+    <button id="apply">Apply</button>
+</div>
+</div>
+<div class="chat-main"><div class="top-bar"><span>⚡ Cognitive Core</span><button id="toggleSettings">⚙️ Settings</button></div>
+<div class="messages" id="messages"></div>
+<div class="input-area"><input id="queryInput"><button id="sendBtn">Send</button></div>
+</div>
+<script>
+let db, currentConvoId, conversations = [], messages = [];
+function openDB(){
+    let req = indexedDB.open("CrownStar",2);
+    req.onupgradeneeded = (e) => { db = e.target.result; if(!db.objectStoreNames.contains("conv")) db.createObjectStore("conv",{keyPath:"id"}); if(!db.objectStoreNames.contains("msg")) db.createObjectStore("msg",{keyPath:"id",autoIncrement:true}); };
+    req.onsuccess = (e) => { db = e.target.result; loadConv(); };
+}
+function loadConv(){
+    let tx = db.transaction("conv","readonly");
+    tx.objectStore("conv").getAll().onsuccess = (e) => {
+        conversations = e.target.result;
+        if(conversations.length===0){
+            let id = Date.now().toString();
+            conversations = [{id:id, title:"New Chat"}];
+            let tx2 = db.transaction("conv","readwrite");
+            tx2.objectStore("conv").add(conversations[0]);
+        }
+        currentConvoId = conversations[0].id;
+        renderConv();
+        loadMsg(currentConvoId);
+    };
+}
+function renderConv(){
+    const list = document.getElementById("convoList");
+    list.innerHTML = "";
+    conversations.forEach(conv => {
+        let div = document.createElement("div");
+        div.className = "convo-item" + (currentConvoId===conv.id ? " active" : "");
+        div.innerText = conv.title;
+        div.onclick = () => { currentConvoId = conv.id; loadMsg(conv.id); renderConv(); };
+        list.appendChild(div);
+    });
+}
+function loadMsg(convId){
+    let tx = db.transaction("msg","readonly");
+    tx.objectStore("msg").getAll().onsuccess = (e) => {
+        messages = e.target.result.filter(m => m.convId === convId).sort((a,b)=>a.id-b.id);
+        renderMsg();
+    };
+}
+function renderMsg(){
+    const container = document.getElementById("messages");
+    container.innerHTML = "";
+    messages.forEach(msg => {
+        let div = document.createElement("div");
+        div.className = "message " + msg.role;
+        div.innerHTML = `<strong>${msg.role==="user"?"You":"CrownStar"}:</strong><br>${escapeHtml(msg.content)}`;
+        container.appendChild(div);
+    });
+    container.scrollTop = container.scrollHeight;
+}
+function addMsg(role, content){
+    let newMsg = {id:Date.now(), convId:currentConvoId, role:role, content:content};
+    messages.push(newMsg);
+    let tx = db.transaction("msg","readwrite");
+    tx.objectStore("msg").add(newMsg);
+    renderMsg();
+}
+async function send(){
+    let input = document.getElementById("queryInput");
+    let text = input.value.trim();
+    if(!text) return;
+    input.value = "";
+    addMsg("user", text);
+    try {
+        let ans = await window.pywebview.api.chat(text);
+        addMsg("assistant", ans);
+    } catch(e) { addMsg("assistant", "Error: "+e.message); }
+}
+function escapeHtml(s){ return s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+document.getElementById("sendBtn").onclick = send;
+document.getElementById("queryInput").onkeypress = (e) => { if(e.key==="Enter") send(); };
+document.getElementById("newConvoBtn").onclick = () => {
+    let newId = Date.now().toString();
+    let newConv = {id:newId, title:"New Chat"};
+    let tx = db.transaction("conv","readwrite");
+    tx.objectStore("conv").add(newConv);
+    conversations.push(newConv);
+    currentConvoId = newId;
+    renderConv();
+    messages = [];
+    renderMsg();
+};
+document.getElementById("exportBtn").onclick = async () => {
+    let data = {conversations, messages};
+    let res = await window.pywebview.api.export_conversation(data);
+    alert(res);
+};
+document.getElementById("toggleSettings").onclick = () => {
+    let p = document.getElementById("settingsPanel");
+    p.style.display = p.style.display === "none" ? "block" : "none";
+};
+document.getElementById("apply").onclick = async () => {
+    let settings = {
+        min_length: parseInt(document.getElementById("minLength").value),
+        iq: parseInt(document.getElementById("iq").value),
+        eq: parseInt(document.getElementById("eq").value),
+        personality: document.getElementById("pers").value,
+        language: document.getElementById("lang").value
+    };
+    await window.pywebview.api.update_settings(settings);
+    alert("Settings applied");
+};
+document.getElementById("minLength").oninput = () => document.getElementById("minVal").innerText = document.getElementById("minLength").value;
+document.getElementById("iq").oninput = () => document.getElementById("iqVal").innerText = document.getElementById("iq").value;
+document.getElementById("eq").oninput = () => document.getElementById("eqVal").innerText = document.getElementById("eq").value;
+openDB();
+</script>
+</body>
+</html>
