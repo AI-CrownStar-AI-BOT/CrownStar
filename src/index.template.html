@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>CrownStar {{TIER}}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0c1a;--surface:#1e293b;--primary:#3b82f6;--accent:#ffcc4d;--text:#eef4ff}
+body.light{--bg:#f0f4f8;--surface:#fff;--primary:#2563eb;--accent:#eab308;--text:#1e293b}
+body{background:var(--bg);color:var(--text);font-family:sans-serif;height:100vh;display:flex}
+.sidebar{width:280px;background:var(--surface);border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column}
+.sidebar-header{padding:20px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
+.logo{font-size:1.5rem;font-weight:bold;background:linear-gradient(135deg,var(--accent),var(--primary));-webkit-background-clip:text;color:transparent}
+.convo-list{flex:1;overflow-y:auto;padding:12px}
+.convo-item{background:rgba(255,255,255,0.05);border-radius:14px;padding:10px;margin-bottom:6px;cursor:pointer;border-left:3px solid transparent}
+.convo-item.active{border-left-color:var(--accent);background:rgba(59,130,246,0.15)}
+.new-convo{margin:12px;background:linear-gradient(135deg,var(--primary),#8b5cf6);border:none;padding:10px;border-radius:40px;color:white;font-weight:bold;cursor:pointer}
+.chat-main{flex:1;display:flex;flex-direction:column}
+.top-bar{padding:12px 20px;background:var(--surface);border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between}
+.messages{flex:1;overflow-y:auto;padding:20px}
+.message{margin-bottom:16px;max-width:85%}
+.user{margin-left:auto;background:var(--primary);border-radius:20px 20px 4px 20px;padding:10px 16px;color:white}
+.assistant{margin-right:auto;background:var(--surface);border-radius:20px 20px 20px 4px;padding:10px 16px;border-left:3px solid var(--accent)}
+.input-area{padding:16px 20px;background:var(--surface);display:flex;gap:12px;border-top:1px solid rgba(255,255,255,0.1)}
+input{flex:1;background:var(--bg);border:none;padding:12px 20px;border-radius:40px;color:var(--text)}
+button{background:linear-gradient(135deg,var(--primary),#8b5cf6);border:none;padding:0 28px;border-radius:40px;font-weight:bold;cursor:pointer;color:white}
+.voice-btn{background:var(--accent);margin-left:8px;padding:0 20px}
+.amenities-bar{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;background:var(--surface);border-bottom:1px solid rgba(255,255,255,0.1)}
+.amenity-btn{background:var(--bg);border:none;padding:4px 12px;border-radius:40px;cursor:pointer;color:var(--text);font-size:0.7rem}
+.status{font-size:0.7rem;padding:6px 12px;background:var(--surface);border-top:1px solid rgba(255,255,255,0.1)}
+@media(max-width:640px){.sidebar{display:none}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+</head>
+<body>
+<div class="sidebar"><div class="sidebar-header"><div class="logo">⭐ CrownStar {{TIER}}</div><button class="theme-toggle" id="themeToggle">🌙</button></div>
+<div class="convo-list" id="convoList"></div><button class="new-convo" id="newConvoBtn">+ New Conversation</button>
+<button class="new-convo" id="exportBtn" style="background:#2d3748;">📎 Export</button></div>
+<div class="chat-main"><div class="top-bar"><span>⚡ Cognitive Core Active</span><span id="status">Ready</span></div>
+<div class="amenities-bar" id="amenitiesBar"></div><div class="messages" id="messages"></div>
+<div class="input-area"><input id="queryInput" placeholder="Ask anything... (text or voice)"><button id="voiceBtn" class="voice-btn">🎤</button>
+<button id="sendBtn">Send</button><label class="file-label">📎 Attach<input type="file" id="fileInput" style="display:none"></label></div>
+<div class="status" id="statusText">Ready – Free tier works fully</div></div>
+<script>
+let db, currentConvoId, conversations = [], messages = [], recognition = null;
+let limits = {maxInput: {{MAX_INPUT}}, maxOutput: {{MAX_OUTPUT}}};
+let amenities = {{AMENITIES_JS}};
+if('webkitSpeechRecognition' in window){
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = false; recognition.interimResults = false; recognition.lang = 'en-US';
+    recognition.onresult = (e) => { document.getElementById('queryInput').value = e.results[0][0].transcript; sendMessage(); };
+}
+function openDB(){
+    let req = indexedDB.open("CrownStarDesktop",2);
+    req.onupgradeneeded = (e) => {
+        db = e.target.result;
+        if(!db.objectStoreNames.contains("conversations")) db.createObjectStore("conversations",{keyPath:"id"});
+        if(!db.objectStoreNames.contains("messages")) db.createObjectStore("messages",{keyPath:"id",autoIncrement:true});
+    };
+    req.onsuccess = (e) => { db = e.target.result; loadConversations(); };
+}
+function loadConversations(){
+    let tx = db.transaction("conversations","readonly");
+    tx.objectStore("conversations").getAll().onsuccess = (e) => {
+        conversations = e.target.result;
+        if(conversations.length===0){
+            let id = Date.now().toString();
+            conversations = [{id:id, title:"New Chat", createdAt:new Date().toISOString()}];
+            let tx2 = db.transaction("conversations","readwrite");
+            tx2.objectStore("conversations").add(conversations[0]);
+        }
+        currentConvoId = conversations[0].id;
+        renderConversations();
+        loadMessages(currentConvoId);
+    };
+}
+function renderConversations(){
+    const list = document.getElementById("convoList");
+    list.innerHTML = "";
+    conversations.forEach(conv => {
+        const div = document.createElement("div");
+        div.className = `convo-item ${currentConvoId===conv.id ? 'active' : ''}`;
+        div.innerText = conv.title;
+        div.onclick = () => { currentConvoId = conv.id; loadMessages(conv.id); renderConversations(); };
+        list.appendChild(div);
+    });
+}
+function loadMessages(convId){
+    let tx = db.transaction("messages","readonly");
+    tx.objectStore("messages").getAll().onsuccess = (e) => {
+        messages = e.target.result.filter(m => m.conversationId === convId).sort((a,b)=>a.id-b.id);
+        renderMessages();
+    };
+}
+function renderMessages(){
+    const container = document.getElementById("messages");
+    container.innerHTML = "";
+    messages.forEach(msg => {
+        const div = document.createElement("div");
+        div.className = `message ${msg.role}`;
+        let content = msg.role === "assistant" ? marked.parse(msg.content) : `<pre>${escapeHtml(msg.content)}</pre>`;
+        div.innerHTML = `<strong>${msg.role==="user"?"You":"CrownStar"}:</strong><br>${content}`;
+        container.appendChild(div);
+        if(msg.role === "assistant") hljs.highlightAll();
+    });
+    container.scrollTop = container.scrollHeight;
+}
+function addMessage(role, content){
+    const newMsg = {id:Date.now(), conversationId:currentConvoId, role:role, content:content};
+    messages.push(newMsg);
+    let tx = db.transaction("messages","readwrite");
+    tx.objectStore("messages").add(newMsg);
+    renderMessages();
+}
+async function sendMessage(){
+    const input = document.getElementById("queryInput");
+    let text = input.value.trim();
+    if(!text) return;
+    if(text.length > limits.maxInput){
+        addMessage("assistant", `⚠️ Input exceeds ${limits.maxInput.toLocaleString()} characters.`);
+        return;
+    }
+    input.value = "";
+    addMessage("user", text);
+    document.getElementById("status").innerText = "Thinking...";
+    try {
+        const answer = await window.pywebview.api.chat(text);
+        let finalAnswer = answer.length > limits.maxOutput ? answer.slice(0, limits.maxOutput) + "..." : answer;
+        addMessage("assistant", finalAnswer);
+        document.getElementById("status").innerText = "Ready";
+    } catch(e) {
+        addMessage("assistant", "⚠️ Core error: " + e.message);
+    }
+}
+function escapeHtml(s){ return s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+document.getElementById("sendBtn").onclick = sendMessage;
+document.getElementById("queryInput").onkeypress = (e) => { if(e.key==="Enter") sendMessage(); };
+document.getElementById("voiceBtn").onclick = () => { if(recognition) recognition.start(); else alert("Voice not supported"); };
+document.getElementById("newConvoBtn").onclick = () => {
+    const newId = Date.now().toString();
+    const newConv = {id:newId, title:"New Chat", createdAt:new Date().toISOString()};
+    const tx = db.transaction("conversations","readwrite");
+    tx.objectStore("conversations").add(newConv);
+    conversations.push(newConv);
+    currentConvoId = newId;
+    renderConversations();
+    messages = [];
+    renderMessages();
+};
+document.getElementById("exportBtn").onclick = async () => {
+    let exportData = {conversations, messages};
+    let result = await window.pywebview.api.export_conversation(exportData);
+    alert(result);
+};
+document.getElementById("fileInput").onchange = async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    if(file.size > {{MAX_FILE_BYTES}}) { alert("File exceeds tier limit"); return; }
+    const reader = new FileReader();
+    reader.onload = (ev) => addMessage("assistant", `📄 File: ${file.name}\n\`\`\`\n${ev.target.result.slice(0,1000)}\n\`\`\``);
+    reader.readAsText(file);
+    e.target.value = "";
+};
+const bar = document.getElementById("amenitiesBar");
+amenities.forEach(a => {
+    const btn = document.createElement("button");
+    btn.className = "amenity-btn";
+    btn.innerText = a.charAt(0).toUpperCase() + a.slice(1);
+    btn.onclick = () => addMessage("assistant", `🎨 ${a} amenity (demo output).`);
+    bar.appendChild(btn);
+});
+document.getElementById("themeToggle").onclick = () => document.body.classList.toggle("light");
+openDB();
+</script>
+</body>
+</html>

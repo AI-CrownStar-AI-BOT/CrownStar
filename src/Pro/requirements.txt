@@ -1,0 +1,5 @@
+pywebview
+aiohttp
+dnspython
+python-whois
+feedparser
