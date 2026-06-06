@@ -1,4 +1,4 @@
-# crownstar_core.py – Proprietary Cognitive Engine
+# crownstar_core.py – Proprietary Cognitive Engine (no de Bono)
 import asyncio, aiohttp, re, random, sqlite3
 from collections import defaultdict
 from datetime import datetime
