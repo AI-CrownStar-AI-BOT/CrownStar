@@ -1,8 +1,10 @@
 name: Build and Release
+
 on:
   push:
     tags:
       - 'v*'
+
 jobs:
   build:
     runs-on: windows-latest
@@ -16,7 +18,9 @@ jobs:
       with:
         python-version: '3.10'
     - name: Install dependencies
-      run: pip install pywebview aiohttp dnspython python-whois feedparser
+      run: |
+        pip install pywebview aiohttp dnspython python-whois feedparser
+        pip install pyinstaller
     - name: Build EXE
       run: |
         cd src/${{ matrix.tier }}
