@@ -22,9 +22,9 @@ jobs:
     - name: Build EXE
       run: |
         cd src/${{ matrix.tier }}
-        pyinstaller CrownStarUltimate_${{ matrix.tier }}.spec
+        pyinstaller --onefile --add-data "index.html;." --add-data "addons.json;." --hidden-import crownstar_core crownstar_desktop.py
     - name: Upload EXE
       uses: actions/upload-artifact@v4
       with:
         name: CrownStarUltimate_${{ matrix.tier }}
-        path: src/${{ matrix.tier }}/dist/CrownStarUltimate_${{ matrix.tier }}.exe
+        path: src/${{ matrix.tier }}/dist/crownstar_desktop.exe
