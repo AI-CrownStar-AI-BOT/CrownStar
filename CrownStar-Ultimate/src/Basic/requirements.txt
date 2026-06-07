@@ -1,0 +1,6 @@
+pywebview
+aiohttp
+dnspython
+feedparser
+chardet
+beautifulsoup4
