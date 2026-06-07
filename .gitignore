@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+venv/
+dist/
+build/
+*.spec
+installers/
+.DS_Store
+memory.db
+export.json
+logs/
+temp/
